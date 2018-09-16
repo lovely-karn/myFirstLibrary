@@ -1,0 +1,73 @@
+apply plugin: 'com.android.library'
+apply plugin: 'com.jfrog.bintray'
+apply plugin: 'com.github.dcendents.android-maven'
+
+android {
+    compileSdkVersion 28
+
+    defaultConfig {
+        minSdkVersion 21
+        targetSdkVersion 28
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+
+    implementation 'androidx.appcompat:appcompat:1.0.0-alpha1'
+    testImplementation 'junit:junit:4.12'
+    androidTestImplementation 'androidx.test:runner:1.1.0-alpha3'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.0-alpha3'
+
+    task generateSourcesJar(type: Jar) {
+        from android.sourceSets.main.java.srcDirs classifier 'sources'
+    }
+
+    task generateJavadocs(type: Javadoc) {
+        failOnError false
+        source = android.sourceSets.main.java.srcDirs
+        classpath += project.files(android.getBootClasspath().join(File.pathSeparator))
+    }
+
+
+
+    task generateJavadocsJar(type: Jar) {
+        from generateJavadocs.destinationDir classifier 'javadoc'
+    }
+
+    generateJavadocsJar.dependsOn generateJavadocs
+
+    artifacts {
+        archives generateJavadocsJar
+        archives generateSourcesJar
+    }
+
+    ext {
+        bintrayRepo = 'myorganisationlovely/lovelyFirstLibraryRepo' // your repo name
+        bintrayName = 'mylittlelibrary' // has to be same as your library module name
+        publishedGroupId = 'com.example.mylittlelibrary' // your module package name
+        libraryName = 'mylittlelibrary'
+        artifact = 'mylittlelibrary' // has to be same as your library module name
+        libraryDescription = 'My test upload of a library'
+        libraryVersion = '1.0'
+        developerId = 'lovely'
+        developerName = 'lovely'
+        developerEmail = 'lovelykumari2297@gmail.com'
+        licenseName = 'The Apache Software License, Version 2.0'
+        licenseUrl = 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+        allLicenses = ["Apache-2.0"]
+    }
+}
