@@ -63,11 +63,13 @@ dependencies {
         artifact = 'mylittlelibrary' // has to be same as your library module name
         libraryDescription = 'My test upload of a library'
         libraryVersion = '1.0'
-        developerId = 'lovely'
-        developerName = 'lovely'
-        developerEmail = 'lovelykumari2297@gmail.com'
+        developerId = 'Lovely Kumari'
+        developerName = 'Lovely Kumari'
+        developerEmail = 'lovelykumari836@gmail.com'
         licenseName = 'The Apache Software License, Version 2.0'
         licenseUrl = 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+        siteUrl = 'https://github.com/lovely-karn/myFirstLibrary'
+        gitUrl = 'https://github.com/lovely-karn/myFirstLibrary.git'
         allLicenses = ["Apache-2.0"]
     }
 }
